@@ -1,1 +1,33 @@
 @import "reset";
+@import "config";
+body {
+    max-width: $max-width-xl;
+    margin: 0 auto; 
+    width: 100%; 
+    font-family: $font-family;
+  }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 162px 17px 162px;
+    border-bottom: 2px solid $border-color-header;
+    @media (max-width:$max-width-md) {
+        padding: 20px 28.75px 17px 35px;
+    }
+  
+    &__logo {
+      img {
+        width: 165.82px;
+        height: 25px; 
+      }
+    }
+
+  &__icon {
+    .icon-image {
+      width: 17px; 
+      height: 20px; 
+      cursor: pointer; 
+    }
+  }
+}
