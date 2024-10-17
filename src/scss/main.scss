@@ -12,6 +12,9 @@ body {
     align-items: center;
     padding: 22px 162px 17px 162px;
     border-bottom: 2px solid $border-color-header;
+    @media (max-width:$max-width-lg) {
+        padding: 20px 28.75px 17px 35px;
+    }
     @media (max-width:$max-width-md) {
         padding: 20px 28.75px 17px 35px;
     }
@@ -36,7 +39,10 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 40px 162px 0 ;
+        padding: 40px 162px 0;
+        @media (max-width:$max-width-lg) {
+            padding: 20px 28.75px 17px 35px;
+        }
     }
     &__title {
         p {
@@ -65,6 +71,9 @@ body {
     &__filters{
         padding: 65px 0 0 162px;
         width: 157px;
+        @media (max-width:$max-width-lg) {
+            padding: 35px 0 0 35px;
+        }
     }
     &__filters-container.cores{
         margin-bottom: 15px;
