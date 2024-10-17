@@ -1,0 +1,68 @@
+Arguments: 
+  /Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/bin/node /Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/bin/yarn install
+
+PATH: 
+  /usr/local/sbin:/Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Applications/iTerm.app/Contents/Resources/utilities:/Users/bruno.sgotti-ext/.composer/vendor/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.16.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/bruno.sgotti-ext/Desktop/Natan/desenvolvedor-cadastra/package.json: Unexpected token n in JSON at position 2
+      at JSON.parse (<anonymous>)
+      at /Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/bruno.sgotti-ext/.nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+  n  "version": "1.0.0",
+    "description": "Desafio da Cadastra para novos colaboradores",
+    "main": "index.js",
+    "scripts": {
+      "start": "node_modules/.bin/cross-env SERVER_API=http://localhost:5000 npm-run-all --parallel dev server",
+      "start:gp": "npm-run-all --parallel dev server",
+      "dev": "gulp",
+      "server": "json-server ./db.json --port 5000"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Cadastra-Next-Gen-Company/desenvolvedor-cadastra"
+    },
+    "author": "Heraldo Ecard Roque Filho",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/Cadastra-Next-Gen-Company/desenvolvedor-cadastra/issues"
+    },
+    "homepage": "https://github.com/Cadastra-Next-Gen-Company/desenvolvedor-cadastra#readme",
+    "devDependencies": {
+      "browser-sync": "^2.27.7",
+      "del": "^6.0.0",
+      "gulp": "^4.0.2",
+      "gulp-autoprefixer": "^8.0.0",
+      "gulp-sass": "^5.0.0",
+      "gulp-sourcemaps": "^3.0.0",
+      "npm-run-all": "^4.1.5",
+      "sass": "^1.43.4",
+      "ts-loader": "^9.4.1",
+      "typescript": "^4.9.3",
+      "webpack": "^5.62.1"
+    },
+    "dependencies": {
+      "cross-env": "^7.0.3",
+      "json-server": "^0.17.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
