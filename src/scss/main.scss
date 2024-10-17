@@ -102,12 +102,6 @@ body {
                 background-color: $color-orange;
                 outline: none;
             }
-
-            option::checked {
-                background-color: $color-orange;
-                color: #fff;
-            }
-           
         }
         .checkbox__label{
             font-size: $font-size-small;
@@ -163,6 +157,7 @@ body {
         line-height: 12.79px;
         padding: 0;
         text-transform: uppercase;
+        cursor: pointer;
       }
 
       &__filters-container.price{
@@ -197,13 +192,7 @@ body {
                 border-color: $color-orange;
                 background-color: $color-orange;
                 outline: none;
-            }
-
-            option::checked {
-                background-color: $color-orange;
-                color: #fff;
-            }
-           
+            }           
         }
         .checkbox__label{
             font-size: $font-size-small;
