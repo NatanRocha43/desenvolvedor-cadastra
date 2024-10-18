@@ -228,10 +228,6 @@ body {
           padding-left: 120px;
         }
       
-        @media (max-width: 768px) {
-          grid-template-columns: 1fr;
-          padding-left: 100px;
-        }
       }
       
       .product-card {
@@ -280,6 +276,24 @@ body {
             font-size: $font-size-small2;
             font-weight: $font-weight-bold;
             line-height: 19.07px;
+        }
+      }
+
+      &__button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0 35px 0;
+        button{
+          font-size: $font-size-small2;
+          font-weight: $font-weight-bold;
+          line-height: 19.07px;
+          color: $color-white;
+          text-transform: $text-uppercase;
+          padding: 8px 31px;
+          background-color: $color-orange;
+          border: none;
+          cursor: pointer;
         }
       }
 }
