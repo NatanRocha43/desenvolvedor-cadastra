@@ -51,9 +51,7 @@ function showMoreProducts() {
   renderProducts(products);
 }
 
-function sortProducts(event: Event) {
-  const selectedValue = (event.target as HTMLSelectElement).value;
-
+function sortProducts(selectedValue: string) {
   const sortStrategies: { [key: string]: (a: Product, b: Product) => number } = {
     'recent': (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     'lowest-price': (a, b) => a.price - b.price,
@@ -62,10 +60,40 @@ function sortProducts(event: Event) {
 
   if (sortStrategies[selectedValue]) {
     products.sort(sortStrategies[selectedValue]);
+    renderProducts(products);
   }
+}
 
-  visibleProductsCount = window.innerWidth <= 1024 ? 4 : 9;
-  renderProducts(products);
+function sortProductsByModal() {
+  const orderModal = document.getElementById('orderModal');
+  const orderOptions = document.querySelectorAll('.filtro-modal span');
+
+  orderOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const selectedValue = option.getAttribute('data-sort');
+      if (selectedValue) {
+        sortProducts(selectedValue);
+      }
+      if (orderModal) {
+        orderModal.classList.remove('show');
+      }
+    });
+  });
+}
+
+function setupSelectListener() {
+  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (event) => {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      sortProducts(selectedValue);
+      // Fecha o modal se estiver aberto
+      const orderModal = document.getElementById('orderModal');
+      if (orderModal) {
+        orderModal.classList.remove('show');
+      }
+    });
+  }
 }
 
 function toggleColorFilters() {
@@ -135,10 +163,91 @@ const observer = new MutationObserver(() => {
   addBuyButtonListeners();
 });
 
+function setupModals() {
+  const filterButton = document.querySelector('.filterMobile-filter');
+  const orderButton = document.querySelector('.filterMobile-order');
+  const filterModal = document.getElementById('filterModal');
+  const orderModal = document.getElementById('orderModal');
+  const closeButtons = document.querySelectorAll('.close-modal');
+
+  filterButton?.addEventListener('click', () => {
+    filterModal?.classList.add('show');
+  });
+
+  orderButton?.addEventListener('click', () => {
+    orderModal?.classList.add('show');
+    sortProductsByModal();
+  });
+
+  closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterModal?.classList.remove('show');
+      orderModal?.classList.remove('show');
+    });
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === filterModal) {
+      filterModal?.classList.remove('show');
+    }
+    if (event.target === orderModal) {
+      orderModal?.classList.remove('show');
+    }
+  });
+
+  const clearFiltersButton = document.getElementById('clear-filters');
+  const applyFiltersButton = document.getElementById('apply-filters');
+
+  if (clearFiltersButton) {
+    clearFiltersButton.addEventListener('click', clearFilters);
+  }
+
+  if (applyFiltersButton) {
+    applyFiltersButton.addEventListener('click', () => {
+      applyFiltersAndCloseModal(filterModal);
+    });
+  }
+}
+
+function clearFilters() {
+  document.querySelectorAll('.product-list__color-checkboxes .checkbox__input').forEach(checkbox => {
+    (checkbox as HTMLInputElement).checked = false;
+  });
+
+  document.querySelectorAll('.product-list__price-checkboxes .checkbox__input').forEach(checkbox => {
+    (checkbox as HTMLInputElement).checked = false;
+  });
+
+  document.querySelectorAll('.size-item').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  renderProducts(products);
+}
+
+function applyFiltersAndCloseModal(modal: HTMLElement) {
+  modal.classList.remove('show');
+}
+
+function moveFiltersToModal() {
+  const filtersElement = document.querySelector('.product-list__filters');
+  const filterModalFirst = document.querySelector('.filter-modal-first');
+
+  if (window.innerWidth <= 1024) {
+    if (filtersElement && filterModalFirst) {
+      filterModalFirst.appendChild(filtersElement);
+    }
+  } else {
+    const originalFiltersContainer = document.querySelector('.desktop-filters-container');
+    if (filtersElement && originalFiltersContainer) {
+      originalFiltersContainer.appendChild(filtersElement);
+    }
+  }
+}
+
 function main() {
   document.getElementById('see-more-button')?.addEventListener('click', showMoreProducts);
   document.getElementById('toggle-color-filters')?.addEventListener('click', toggleColorFilters);
-  document.getElementById('sort-select')?.addEventListener('change', sortProducts);
   
   document.querySelectorAll('.product-list__color-checkboxes .checkbox__input').forEach(checkbox => {
     checkbox.addEventListener('change', filterProductsByColor);
@@ -161,6 +270,11 @@ function main() {
   }
 
   loadProducts();
+  setupModals();
+  setupSelectListener(); 
+  moveFiltersToModal();
+
+  window.addEventListener('resize', moveFiltersToModal);
 }
 
 document.addEventListener("DOMContentLoaded", main);

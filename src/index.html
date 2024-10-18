@@ -37,8 +37,57 @@
           </select>
         </div>
       </div>
-      <div class="product-list__content">
+
+
+
+
+
+      <div class="product-list__filterMobile">
+        <div>
+          <span class="filterMobile-filter">Filtrar</span>
+        </div>
+        <div>
+          <span class="filterMobile-order">Ordenar</span>
+        </div>
+      </div>
+
+
+      <!-- Modal de Filtro -->
+      <div id="filterModal" class="modal">
+        <div class="modal-content">
+          <p>Filtrar</p>
+          <span class="close-modal">X</span>
+          <!-- Conteúdo do modal de filtro -->
+        </div>
+        <div class="filter-modal-first">
+
+        </div>
+        <div class="button-filter-mobile">
+          
+          <button class="appl-filter"id="apply-filters">Aplicar</button>
+          <button class="clean-filter" id="clear-filters">Limpar</button>
+        </div>
         
+      </div>
+
+      <!-- Modal de Ordenar -->
+      <div id="orderModal" class="modal">
+        <div class="modal-content">
+          <p>Ordenar</p>
+          <span class="close-modal">X</span>
+        </div>
+        <div class="filtro-modal">
+          <span data-sort="recent">Mais recente</span>
+          <span data-sort="highest-price">Maior preço</span>
+          <span data-sort="lowest-price">Menor preço</span>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="product-list__content">
         <div class="product-list__filters">
           <div class="product-list__filters-container cores">
             <p>Cores</p>
