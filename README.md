@@ -15,7 +15,7 @@ Este projeto é uma implementação de um layout de e-commerce, focando na exper
 ## Como Rodar o Projeto
 
 1. **Clone o repositório:**
- git clone git@github.com:NatanRocha43/desenvolvedor-cadastra.git
+ git clone [git@github.com:NatanRocha43/desenvolvedor-cadastra.git](https://github.com/NatanRocha43/desenvolvedor-cadastra.git)
 
  2. **Acessar o diretorio:**
  cd desenvolvedor-cadastra
