@@ -11,24 +11,28 @@ function renderProducts(productsToRender: Product[]) {
   productContainer.innerHTML = '';
   const visibleProducts = productsToRender.slice(0, visibleProductsCount);
 
-  visibleProducts.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.classList.add('product-card');
-    productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" class="product-card__image">
-      <p class="product-card__title">${product.name}</p>
-      <p class="product-card__price">R$ ${product.price.toFixed(2)}</p>
-      <p class="product-card__discount">Até ${product.parcelamento[0]}x de R$${product.parcelamento[1].toFixed(2)}</p>
-      <button class="product-card__button">Comprar</button>
-    `;
-    productContainer.appendChild(productCard);
-  });
+  visibleProducts.forEach(createProductCard(productContainer));
 
+  toggleSeeMoreButton(productsToRender.length);
+}
+
+const createProductCard = (container: HTMLElement) => (product: Product) => {
+  const productCard = document.createElement('div');
+  productCard.classList.add('product-card');
+  productCard.innerHTML = `
+    <img src="${product.image}" alt="${product.name}" class="product-card__image">
+    <p class="product-card__title">${product.name}</p>
+    <p class="product-card__price">R$ ${product.price.toFixed(2)}</p>
+    <p class="product-card__discount">Até ${product.parcelamento[0]}x de R$${product.parcelamento[1].toFixed(2)}</p>
+    <button class="product-card__button">Comprar</button>
+  `;
+  container.appendChild(productCard);
+};
+
+function toggleSeeMoreButton(totalProducts: number) {
   const seeMoreButton = document.getElementById('see-more-button');
-  if (visibleProductsCount >= productsToRender.length && seeMoreButton) {
-    seeMoreButton.style.display = 'none';
-  } else {
-    seeMoreButton.style.display = 'block';
+  if (seeMoreButton) {
+    seeMoreButton.style.display = visibleProductsCount >= totalProducts ? 'none' : 'block';
   }
 }
 
@@ -43,19 +47,21 @@ async function loadProducts() {
 }
 
 function showMoreProducts() {
-  visibleProductsCount += 9; // Adiciona 9 produtos a mais
+  visibleProductsCount += 9;
   renderProducts(products);
 }
 
 function sortProducts(event: Event) {
   const selectedValue = (event.target as HTMLSelectElement).value;
 
-  if (selectedValue === 'recent') {
-    products.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  } else if (selectedValue === 'lowest-price') {
-    products.sort((a, b) => a.price - b.price);
-  } else if (selectedValue === 'highest-price') {
-    products.sort((a, b) => b.price - a.price);
+  const sortStrategies: { [key: string]: (a: Product, b: Product) => number } = {
+    'recent': (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    'lowest-price': (a, b) => a.price - b.price,
+    'highest-price': (a, b) => b.price - a.price,
+  };
+
+  if (sortStrategies[selectedValue]) {
+    products.sort(sortStrategies[selectedValue]);
   }
 
   visibleProductsCount = window.innerWidth <= 1024 ? 4 : 9;
@@ -64,9 +70,8 @@ function sortProducts(event: Event) {
 
 function toggleColorFilters() {
   const colorCheckboxes = document.querySelectorAll('.product-list__color-checkboxes .hidden');
-  colorCheckboxes.forEach(checkbox => {
-    checkbox.classList.toggle('hidden');
-  });
+  colorCheckboxes.forEach(checkbox => checkbox.classList.toggle('hidden'));
+
   const toggleButton = document.getElementById('toggle-color-filters');
   if (toggleButton) {
     toggleButton.style.display = 'none';
@@ -75,7 +80,7 @@ function toggleColorFilters() {
 
 function filterProductsByColor() {
   const selectedColors = Array.from(document.querySelectorAll('.product-list__color-checkboxes .checkbox__input:checked'))
-    .map((checkbox: HTMLInputElement) => checkbox.value); // Obtemos o value diretamente
+    .map((checkbox: HTMLInputElement) => checkbox.value);
 
   const filteredProducts = selectedColors.length
     ? products.filter(product => selectedColors.includes(product.color))
@@ -87,59 +92,74 @@ function filterProductsByColor() {
 
 function filterProductsByPrice() {
   const selectedPrices = Array.from(document.querySelectorAll('.product-list__price-checkboxes .checkbox__input:checked'))
-    .map((checkbox: HTMLInputElement) => checkbox.value); // Obtemos o value de cada checkbox selecionado
+    .map((checkbox: HTMLInputElement) => checkbox.value);
 
   const filteredProducts = selectedPrices.length
-    ? products.filter(product => {
-        return selectedPrices.some(priceRange => {
-          const [min, max] = priceRange.split('-').map(Number); // Dividimos o valor em um intervalo (ex: "0-50")
-          if (max) {
-            return product.price >= min && product.price <= max; // Comparar dentro do intervalo
-          } else {
-            return product.price >= min; // Para valores como "500+", comparar apenas o mínimo
-          }
-        });
-      })
+    ? products.filter(product => selectedPrices.some(priceRange => {
+        const [min, max] = priceRange.split('-').map(Number);
+        return max ? product.price >= min && product.price <= max : product.price >= min;
+      }))
     : products;
 
-  visibleProductsCount = window.innerWidth <= 1024 ? 4 : 9; // Resetar o contador ao filtrar
+  visibleProductsCount = window.innerWidth <= 1024 ? 4 : 9;
   renderProducts(filteredProducts);
 }
-
 
 function filterProductsBySize() {
   const selectedSize = this.getAttribute('data-size');
 
-  document.querySelectorAll('.size-item').forEach(button => {
-    button.classList.remove('active');
-  });
-
+  document.querySelectorAll('.size-item').forEach(button => button.classList.remove('active'));
   this.classList.add('active');
-
-  const seeMoreButton = document.getElementById('see-more-button');
-  if (seeMoreButton) {
-    seeMoreButton.style.display = 'none';
-  }
 
   const filteredProducts = products.filter(product => product.size.includes(selectedSize));
   
   renderProducts(filteredProducts);
 }
 
+function updateCartCount() {
+  const cartCountElement = document.querySelector('.span-count');
+
+  if (cartCountElement) {
+    let currentCount = parseInt(cartCountElement.textContent, 10);
+    cartCountElement.textContent = (currentCount + 1).toString();
+  }
+}
+
+function addBuyButtonListeners() {
+  document.querySelectorAll('.product-card__button').forEach(button => {
+    button.addEventListener('click', updateCartCount);
+  });
+}
+
+const observer = new MutationObserver(() => {
+  addBuyButtonListeners();
+});
 
 function main() {
   document.getElementById('see-more-button')?.addEventListener('click', showMoreProducts);
   document.getElementById('toggle-color-filters')?.addEventListener('click', toggleColorFilters);
   document.getElementById('sort-select')?.addEventListener('change', sortProducts);
+  
   document.querySelectorAll('.product-list__color-checkboxes .checkbox__input').forEach(checkbox => {
     checkbox.addEventListener('change', filterProductsByColor);
   });
+
   document.querySelectorAll('.product-list__price-checkboxes .checkbox__input').forEach(checkbox => {
     checkbox.addEventListener('change', filterProductsByPrice);
   });
+
   document.querySelectorAll('.size-item').forEach(button => {
     button.addEventListener('click', filterProductsBySize);
   });
+
+  const productContainer = document.getElementById('product-container');
+  if (productContainer) {
+    observer.observe(productContainer, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
   loadProducts();
 }
 
