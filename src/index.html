@@ -10,145 +10,147 @@
 </head>
 
 <body>
-
-  <header class="header">
-    <div class="header__logo">
-      <img src="./img/logo-header.png" alt="Logo" />
-    </div>
-    <div class="header__icon">
-      <img src="./img/icon-cart.png" alt="Icon" class="icon-image" />
-    </div>
-  </header>
-
-  <main class="product-list">
-    <div class="product-list__container">
-      <div class="product-list__title">
-        <p>Blusas</p>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__logo">
+        <img src="./img/logo-header.png" alt="Logo" />
       </div>
-      <div class="product-list__sort">
-        <select id="sort-select" name="sortOptions">
-          <option value="" disabled selected>Ordenar por:</option>
-          <option value="recent">Mais recentes</option>
-          <option value="lowest-price">Menor preço</option>
-          <option value="highest-price">Maior preço</option>
-        </select>
+      <div class="header__icon">
+        <img src="./img/icon-cart.png" alt="Icon" class="icon-image" />
       </div>
-    </div>
-    <div class="product-list__content">
-      
-      <div class="product-list__filters">
-        <div class="product-list__filters-container cores">
-          <p>Cores</p>
-        </div>
+    </header>
   
-        <div class="product-list__color-checkboxes">
-          <div class="product-list__color-checkbox checkbox--yellow">
-            <input type="checkbox" id="checkbox-yellow" value="Amarelo" class="checkbox__input">
-            <label for="checkbox-yellow" class="checkbox__label">Amarelo</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--blue">
-            <input type="checkbox" id="checkbox-blue" value="Azul" class="checkbox__input">
-            <label for="checkbox-blue" class="checkbox__label">Azul</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--white">
-            <input type="checkbox" id="checkbox-white" value="Branco" class="checkbox__input">
-            <label for="checkbox-white" class="checkbox__label">Branco</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--gray">
-            <input type="checkbox" id="checkbox-gray" value="Cinza" class="checkbox__input">
-            <label for="checkbox-gray" class="checkbox__label">Cinza</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--orange">
-            <input type="checkbox" id="checkbox-orange" value="Laranja" class="checkbox__input">
-            <label for="checkbox-orange" class="checkbox__label">Laranja</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--green hidden">
-            <input type="checkbox" id="checkbox-green" value="Verde" class="checkbox__input">
-            <label for="checkbox-green" class="checkbox__label">Verde</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--red hidden">
-            <input type="checkbox" id="checkbox-red" value="Vermelho" class="checkbox__input">
-            <label for="checkbox-red" class="checkbox__label">Vermelho</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--black hidden">
-            <input type="checkbox" id="checkbox-black" value="Preto" class="checkbox__input">
-            <label for="checkbox-black" class="checkbox__label">Preto</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--pink hidden">
-            <input type="checkbox" id="checkbox-pink" value="Rosa" class="checkbox__input">
-            <label for="checkbox-pink" class="checkbox__label">Rosa</label>
-          </div>
-          <div class="product-list__color-checkbox checkbox--wine hidden">
-            <input type="checkbox" id="checkbox-wine" value="Vinho" class="checkbox__input">
-            <label for="checkbox-wine" class="checkbox__label">Vinho</label>
-          </div>
-          <span id="toggle-color-filters" class="product-list__toggle-filters">Ver todas as cores
-            <img src="./img/icon-select.png" alt="Ícone" class="product-list__icon" />
-          </span>
+    <main class="product-list">
+      <div class="product-list__container">
+        <div class="product-list__title">
+          <p>Blusas</p>
         </div>
+        <div class="product-list__sort">
+          <select id="sort-select" name="sortOptions">
+            <option value="" disabled selected>Ordenar por:</option>
+            <option value="recent">Mais recentes</option>
+            <option value="lowest-price">Menor preço</option>
+            <option value="highest-price">Maior preço</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-list__content">
         
-        <div class="product-list__filters-container tamanho">
-          <p>Tamanhos</p>
-        </div>
-        <div class="size-container">
-          <div class="size-grid">
-            <button class="size-item" data-size="P">P</button>
-            <button class="size-item" data-size="M">M</button>
-            <button class="size-item" data-size="G">G</button>
-            <button class="size-item" data-size="GG">GG</button>
-            <button class="size-item" data-size="U">U</button>
-            <button class="size-item" data-size="36">36</button>
-            <button class="size-item" data-size="38">38</button>
-            <button class="size-item" data-size="40">40</button>
-            <button class="size-item" data-size="44">44</button>
-            <button class="size-item" data-size="46">46</button>
+        <div class="product-list__filters">
+          <div class="product-list__filters-container cores">
+            <p>Cores</p>
           </div>
-        </div>
-  
-        <div>
-          <div class="product-list__filters-container price">
-            <p>Faixa de Preço</p>
-          </div>
-  
-          <div class="product-list__price-checkboxes">
-            <div class="product-list__price-checkbox checkbox--first">
-              <input type="checkbox" id="checkbox-first" value="0-50" class="checkbox__input">
-              <label for="checkbox-first" class="checkbox__label">de R$0 até R$50</label>
-            </div>
-            <div class="product-list__price-checkbox checkbox--second">
-              <input type="checkbox" id="checkbox-second" value="51-150" class="checkbox__input">
-              <label for="checkbox-second" class="checkbox__label">de R$51 até R$150</label>
-            </div>
-            <div class="product-list__price-checkbox checkbox--third">
-              <input type="checkbox" id="checkbox-third" value="151-300" class="checkbox__input">
-              <label for="checkbox-third" class="checkbox__label">de R$151 até R$300</label>
-            </div>
-            <div class="product-list__price-checkbox checkbox--fourth">
-              <input type="checkbox" id="checkbox-fourth" value="301-500" class="checkbox__input">
-              <label for="checkbox-fourth" class="checkbox__label">de R$301 até R$500</label>
-            </div>
-            <div class="product-list__price-checkbox checkbox--fifth">
-              <input type="checkbox" id="checkbox-fifth" value="500+" class="checkbox__input">
-              <label for="checkbox-fifth" class="checkbox__label">a partir de R$500</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="product-container" class="product-list__grid">
-        <div class="product-card"></div>
-      </div>
-    </div>
-    <div class="product-list__button">
-      <button id="see-more-button" class="see-more-button">Carregar mais</button>
-    </div>
     
-  </main>
-
-  <footer class="footer">
-    <div class="footer__container">
-      <p class="footer__content">CADASTRA: Implantação de E-commerce VTEX</p>
-    </div>
-  </footer>
+          <div class="product-list__color-checkboxes">
+            <div class="product-list__color-checkbox checkbox--yellow">
+              <input type="checkbox" id="checkbox-yellow" value="Amarelo" class="checkbox__input">
+              <label for="checkbox-yellow" class="checkbox__label">Amarelo</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--blue">
+              <input type="checkbox" id="checkbox-blue" value="Azul" class="checkbox__input">
+              <label for="checkbox-blue" class="checkbox__label">Azul</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--white">
+              <input type="checkbox" id="checkbox-white" value="Branco" class="checkbox__input">
+              <label for="checkbox-white" class="checkbox__label">Branco</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--gray">
+              <input type="checkbox" id="checkbox-gray" value="Cinza" class="checkbox__input">
+              <label for="checkbox-gray" class="checkbox__label">Cinza</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--orange">
+              <input type="checkbox" id="checkbox-orange" value="Laranja" class="checkbox__input">
+              <label for="checkbox-orange" class="checkbox__label">Laranja</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--green hidden">
+              <input type="checkbox" id="checkbox-green" value="Verde" class="checkbox__input">
+              <label for="checkbox-green" class="checkbox__label">Verde</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--red hidden">
+              <input type="checkbox" id="checkbox-red" value="Vermelho" class="checkbox__input">
+              <label for="checkbox-red" class="checkbox__label">Vermelho</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--black hidden">
+              <input type="checkbox" id="checkbox-black" value="Preto" class="checkbox__input">
+              <label for="checkbox-black" class="checkbox__label">Preto</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--pink hidden">
+              <input type="checkbox" id="checkbox-pink" value="Rosa" class="checkbox__input">
+              <label for="checkbox-pink" class="checkbox__label">Rosa</label>
+            </div>
+            <div class="product-list__color-checkbox checkbox--wine hidden">
+              <input type="checkbox" id="checkbox-wine" value="Vinho" class="checkbox__input">
+              <label for="checkbox-wine" class="checkbox__label">Vinho</label>
+            </div>
+            <span id="toggle-color-filters" class="product-list__toggle-filters">Ver todas as cores
+              <img src="./img/icon-select.png" alt="Ícone" class="product-list__icon" />
+            </span>
+          </div>
+          
+          <div class="product-list__filters-container tamanho">
+            <p>Tamanhos</p>
+          </div>
+          <div class="size-container">
+            <div class="size-grid">
+              <button class="size-item" data-size="P">P</button>
+              <button class="size-item" data-size="M">M</button>
+              <button class="size-item" data-size="G">G</button>
+              <button class="size-item" data-size="GG">GG</button>
+              <button class="size-item" data-size="U">U</button>
+              <button class="size-item" data-size="36">36</button>
+              <button class="size-item" data-size="38">38</button>
+              <button class="size-item" data-size="40">40</button>
+              <button class="size-item" data-size="44">44</button>
+              <button class="size-item" data-size="46">46</button>
+            </div>
+          </div>
+    
+          <div>
+            <div class="product-list__filters-container price">
+              <p>Faixa de Preço</p>
+            </div>
+    
+            <div class="product-list__price-checkboxes">
+              <div class="product-list__price-checkbox checkbox--first">
+                <input type="checkbox" id="checkbox-first" value="0-50" class="checkbox__input">
+                <label for="checkbox-first" class="checkbox__label">de R$0 até R$50</label>
+              </div>
+              <div class="product-list__price-checkbox checkbox--second">
+                <input type="checkbox" id="checkbox-second" value="51-150" class="checkbox__input">
+                <label for="checkbox-second" class="checkbox__label">de R$51 até R$150</label>
+              </div>
+              <div class="product-list__price-checkbox checkbox--third">
+                <input type="checkbox" id="checkbox-third" value="151-300" class="checkbox__input">
+                <label for="checkbox-third" class="checkbox__label">de R$151 até R$300</label>
+              </div>
+              <div class="product-list__price-checkbox checkbox--fourth">
+                <input type="checkbox" id="checkbox-fourth" value="301-500" class="checkbox__input">
+                <label for="checkbox-fourth" class="checkbox__label">de R$301 até R$500</label>
+              </div>
+              <div class="product-list__price-checkbox checkbox--fifth">
+                <input type="checkbox" id="checkbox-fifth" value="500+" class="checkbox__input">
+                <label for="checkbox-fifth" class="checkbox__label">a partir de R$500</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="product-container" class="product-list__grid">
+          <div class="product-card"></div>
+        </div>
+      </div>
+      <div class="product-list__button">
+        <button id="see-more-button" class="see-more-button">Carregar mais</button>
+      </div>
+      
+    </main>
+  
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__content">CADASTRA: Implantação de E-commerce VTEX</p>
+      </div>
+    </footer>
+  </div>
+  
 
 </body>
 <script src="bundle.js"></script>
