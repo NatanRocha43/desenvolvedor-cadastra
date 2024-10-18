@@ -156,7 +156,10 @@ body {
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
       }
-      
+      .active{
+        border: 1px solid $color-orange !important;
+        color: $color-black !important;
+      }
       .size-item {
         width: 32px;
         height: 32px;
@@ -170,6 +173,7 @@ body {
         padding: 0;
         text-transform: $text-uppercase;
         cursor: pointer;
+        color: $color-black-transparent;
       }
 
       &__filters-container.price{

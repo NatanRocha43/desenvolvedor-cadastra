@@ -107,6 +107,26 @@ function filterProductsByPrice() {
 }
 
 
+function filterProductsBySize() {
+  const selectedSize = this.getAttribute('data-size');
+
+  document.querySelectorAll('.size-item').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  this.classList.add('active');
+
+  const seeMoreButton = document.getElementById('see-more-button');
+  if (seeMoreButton) {
+    seeMoreButton.style.display = 'none';
+  }
+
+  const filteredProducts = products.filter(product => product.size.includes(selectedSize));
+  
+  renderProducts(filteredProducts);
+}
+
+
 function main() {
   document.getElementById('see-more-button')?.addEventListener('click', showMoreProducts);
   document.getElementById('toggle-color-filters')?.addEventListener('click', toggleColorFilters);
@@ -116,6 +136,9 @@ function main() {
   });
   document.querySelectorAll('.product-list__price-checkboxes .checkbox__input').forEach(checkbox => {
     checkbox.addEventListener('change', filterProductsByPrice);
+  });
+  document.querySelectorAll('.size-item').forEach(button => {
+    button.addEventListener('click', filterProductsBySize);
   });
   loadProducts();
 }
