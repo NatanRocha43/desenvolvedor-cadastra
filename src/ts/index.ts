@@ -16,8 +16,6 @@ function toggleColorFilters() {
 
 function main() {
   console.log(serverUrl);
-
-  // Adiciona o evento de clique ao texto de mostrar/esconder os filtros
   document.getElementById('toggle-color-filters')?.addEventListener('click', toggleColorFilters);
 }
 

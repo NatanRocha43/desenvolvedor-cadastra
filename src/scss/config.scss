@@ -2,7 +2,8 @@
 
 $font-family : "Open Sans", sans-serif;
 
-$color-black: #000000;       
+$color-black: #000000; 
+$color-white: #fff;           
 $color-black-transparent: #00000080; 
 $color-gray: #666666;        
 $color-orange: #FB953E;  
@@ -17,8 +18,11 @@ $font-size-base: 16px;
 $font-size-small: 14px;  
 $font-size-small2: 12px; 
 
+$font-weight-bold: 700;
+$font-weight-padrao: 400;
 
-$font-weigh-padrao: 400;
+
+$text-uppercase: uppercase;
 
 
 $max-width-xl: 1550px; 
